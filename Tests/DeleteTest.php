@@ -2,6 +2,8 @@
 namespace DreamblazeNet\GenSql\Tests;
 use PHPUnit_Framework_TestCase;
 use \DreamblazeNet\GenSql\Delete;
+
+require_once(__DIR__ . DIRECTORY_SEPARATOR. '../Common.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: mriedmann

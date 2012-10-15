@@ -1,7 +1,9 @@
 <?php
 namespace Dreamblaze\GenSql\Tests;
 use PHPUnit_Framework_TestCase;
-use \Dreamblaze\GenSql\Select;
+use \DreamblazeNet\GenSql\Select;
+
+require_once(__DIR__ . DIRECTORY_SEPARATOR. '../Common.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: mriedmann
