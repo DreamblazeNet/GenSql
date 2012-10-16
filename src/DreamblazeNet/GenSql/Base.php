@@ -88,35 +88,28 @@ abstract class Base {
     }
     
     private function parse_conds($conds){
-        //$flipped_fields = array_flip($this->fields);
-        //$fields = array_intersect_key($conds, $flipped_fields);
-        $fields = $conds;
-        if (!empty($fields)) {
-            $merged_params = array();
-            foreach ($fields as $field => $value) {
-                if(strpos($field,'.') === false){
-                    $ufield = $this->table . '.' . $field;
-                } else {
-                    $ufield = $field;
-                    $field = str_replace('.','_',$field);
-                }
-                if(strpos($value,'%') !== false){
-                    $marged_params[] = "$ufield LIKE :$field";
-                } else {
-                    $marged_params[] = "$ufield = :$field";
-                }
+        $merged_params = array();
+        foreach ($conds as $field => $value) {
+            if(strpos($field,'.') === false){
+                $ufield = $this->table . '.' . $field;
+            } else {
+                $ufield = $field;
+                $field = str_replace('.','_',$field);
             }
-            $sql_conds = array(join(' AND ', $marged_params));
-            $vals = $fields;
-            $conds = array_merge($sql_conds, $vals);
-        } else {
-            $conds = null;
+            if(strpos($value,'%') !== false){
+                $merged_params[] = "$ufield LIKE :$field";
+            } else {
+                $merged_params[] = "$ufield = :$field";
+            }
         }
+        $sql_conds = array(join(' AND ', $merged_params));
+        $vals = $conds;
+        $conds = array_merge($sql_conds, $vals);
+
         return $conds;
     }
 
     protected function where_values(){
-        $table = $this->table;
         $conds = $this->conds;
         $values = array();
         if (!empty($conds)) {
@@ -148,22 +141,19 @@ abstract class Base {
     }
 
     protected function where_part(){
-        if (!empty($this->conds)) {
-            if(count($this->conds) > 1){
-                $parts = array();
-                foreach($this->conds as $cond){
-                    $parts[] = $cond[0];
-                }
-                $conds = join(' AND ', array_filter($parts));
-            } else {
-                $conds = $this->conds[0][0];
+        if(count($this->conds) > 1){
+            $parts = array();
+            foreach($this->conds as $cond){
+                $parts[] = $cond[0];
             }
-            if(!empty($conds)){
-                return "WHERE {$conds}";
-            } else {
-                return "";
-            }
+            $conds = join(' AND ', array_filter($parts));
+        } elseif(count($this->conds) == 1) {
+            $conds = $this->conds[0][0];
         }
+        if(!empty($conds)){
+            return "WHERE {$conds}";
+        }
+        return "";
     }
     
     //--

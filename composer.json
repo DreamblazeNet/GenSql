@@ -3,5 +3,8 @@
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-0": { "DreamblazeNet\\GenSql": "src/" }
+    }
 }

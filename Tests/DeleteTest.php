@@ -3,7 +3,6 @@ namespace DreamblazeNet\GenSql\Tests;
 use PHPUnit_Framework_TestCase;
 use \DreamblazeNet\GenSql\Delete;
 
-require_once(__DIR__ . DIRECTORY_SEPARATOR. '../Common.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: mriedmann
@@ -11,6 +10,7 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR. '../Common.php');
  * Time: 20:00
  * To change this template use File | Settings | File Templates.
  */
+
 class DeleteTest extends PHPUnit_Framework_TestCase
 {
     public function testDelete(){

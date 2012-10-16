@@ -3,7 +3,6 @@ namespace DreamblazeNet\GenSql\Tests;
 use PHPUnit_Framework_TestCase;
 use \DreamblazeNet\GenSql\Update;
 
-require_once(__DIR__ . DIRECTORY_SEPARATOR. '../Common.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: Private
