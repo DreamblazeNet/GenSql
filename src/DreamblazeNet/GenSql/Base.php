@@ -32,6 +32,19 @@ abstract class Base {
         if(is_null($fields))
             $fields = array('*');
 
+        if(!is_array($fields))
+            throw new InvalidFieldsException("Fields-Parameter must be an array! Given:" . var_export($fields, true));
+
+        array_walk($fields, function($field){
+            if(is_array($field) && (!isset($field['name']) || !is_string($field['name']))){
+                throw new InvalidFieldsException("Advanced Fields must have a name! Given:" . var_export($field, true));
+            } elseif(is_null($field) || is_array($field) || is_string($field)) {
+                return;
+            } else {
+                throw new InvalidFieldsException("Only null, arrays and strings are allowed as field-definitions! Given:" . var_export($field, true));
+            }
+        });
+
         $this->table = $table;
         $this->fields = array_filter($fields);
     }

@@ -35,6 +35,20 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @expectedException \DreamblazeNet\GenSql\InvalidFieldsException
+     */
+    public function testConstructionWithNonArrayFields(){
+        new Select('testTable', 'notAnArray');
+    }
+
+    /**
+     * @expectedException \DreamblazeNet\GenSql\InvalidFieldsException
+     */
+    public function testConstructionWithNonStringFields(){
+        new Select('testTable', array(0));
+    }
+
     public function testLikewiseWhere(){
         $query = new Select('testTable', array('id', 'name', 'date'));
         $query->where(array('name' => 'hans%'));
