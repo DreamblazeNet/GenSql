@@ -178,6 +178,12 @@ abstract class Base {
     protected function fields_to_sql() {
         $fields = $this->fields;
         $table = $this->table;
+        array_walk($fields, function(&$field){
+            if(is_array($field)){
+                $field = $field['name'];
+            }
+        });
+
         array_walk($fields, function(&$field) use($table) {
                     if(strpos($field, '(') === false && strpos($field,'.') === false)
                         $field = $table . '.' . $field;

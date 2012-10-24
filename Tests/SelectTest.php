@@ -12,20 +12,6 @@ use \DreamblazeNet\GenSql\Select;
  */
 class SelectTest extends PHPUnit_Framework_TestCase
 {
-    public function testConstructionWithFields(){
-        $query = $this->createQuery(array('id', 'name', 'date', 'valid'));
-        $actual = $query->give_sql_and_values();
-        $expected = array('SELECT testTable.id, testTable.name, testTable.date, testTable.valid FROM testTable',array());
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testConstructionWithWildcard(){
-        $query = $this->createQuery();
-        $actual = $query->give_sql_and_values();
-        $expected = array('SELECT testTable.* FROM testTable',array());
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testWhere(){
         $query = $this->createQuery(array('id', 'name', 'date', 'valid'));
         $query->where(array('id' => 1));

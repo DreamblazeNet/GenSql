@@ -11,6 +11,30 @@ use DreamblazeNet\GenSql\Select;
  */
 class BaseTest extends PHPUnit_Framework_TestCase
 {
+    public function testConstructionWithFields(){
+        $query = new Select('testTable', array('id', 'name', 'date', 'valid'));
+        $actual = $query->give_sql_and_values();
+        $expected = array('SELECT testTable.id, testTable.name, testTable.date, testTable.valid FROM testTable',array());
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testConstructionWithWildcard(){
+        $query = new Select('testTable');
+        $actual = $query->give_sql_and_values();
+        $expected = array('SELECT testTable.* FROM testTable',array());
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testConstructionWithAdvancedFields(){
+        $query = new Select('testTable', array(
+            'objId' => array('name' => 'id', 'type' => 'primary_key'),
+            'objValue' => array('name' => 'value', 'type' => 'string')
+        ));
+        $actual = $query->give_sql_and_values();
+        $expected = array('SELECT testTable.id, testTable.value FROM testTable',array());
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testLikewiseWhere(){
         $query = new Select('testTable', array('id', 'name', 'date'));
         $query->where(array('name' => 'hans%'));
