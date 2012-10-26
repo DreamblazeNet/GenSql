@@ -2,7 +2,7 @@
 
 namespace DreamblazeNet\GenSql;
 
-abstract class Base {
+abstract class Base implements Query {
 
     protected $type = 'none'; /* none, one or many */
     protected $fields = array();
