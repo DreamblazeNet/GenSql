@@ -27,7 +27,7 @@ class Insert extends Base {
     }
 
     protected function fields_part(){
-        return '(' . $this->fields_to_sql() . ')';
+        return '(' . $this->fields_to_sql(false) . ')';
     }
 
     protected function values_part(){

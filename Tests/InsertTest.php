@@ -17,7 +17,7 @@ class InsertTest extends PHPUnit_Framework_TestCase
         $query->values(array('id' => 1, 'name' => 'testName', 'value' => 'testValue'));
         $actual = $query->give_sql_and_values();
         $expected = array(
-            'INSERT INTO testTable (testTable.id, testTable.name, testTable.value) VALUES (:id,:name,:value)',
+            'INSERT INTO testTable (id, name, value) VALUES (:id,:name,:value)',
             array(':id' => 1, ':name' => 'testName', ':value' => 'testValue')
         );
         $this->assertEquals($expected, $actual);
@@ -28,7 +28,7 @@ class InsertTest extends PHPUnit_Framework_TestCase
         $query->values(array('id' => 1, 'name' => 'testName', 'value' => 'testValue'));
         $actual = $query->give_sql_and_values();
         $expected = array(
-            'INSERT INTO testTable (testTable.id, testTable.name, testTable.value) VALUES (:id,:name,:value)',
+            'INSERT INTO testTable (id, name, value) VALUES (:id,:name,:value)',
             array(':id' => 1, ':name' => 'testName', ':value' => 'testValue')
         );
         $this->assertEquals($expected, $actual);
@@ -39,7 +39,7 @@ class InsertTest extends PHPUnit_Framework_TestCase
         $query->values(array('id' => 1, 'name' => 'testName', 'date' => '#NOW'));
         $actual = $query->give_sql_and_values();
         $expected = array(
-            'INSERT INTO testTable (testTable.id, testTable.name, testTable.date) VALUES (:id,:name,NOW())',
+            'INSERT INTO testTable (id, name, date) VALUES (:id,:name,NOW())',
             array(':id' => 1, ':name' => 'testName')
         );
         $this->assertEquals($expected, $actual);

@@ -8,7 +8,7 @@ class Delete extends Base
         return "DELETE FROM " . $this->table;
     }
 
-    protected function fields_to_sql()
+    protected function fields_part()
     {
         return '';
     }
