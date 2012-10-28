@@ -22,4 +22,20 @@ class UpdateTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expected, $actual);
     }
+
+    public function testUpdateWithAdvancedFields(){
+        $query = new Update('testTable', array(
+            'tid' => array('name' => 'id'),
+            'tname' => array('name' => 'name'),
+            'tvalue' => array('name' => 'value'))
+        );
+
+        $query->set(array('tname' => 'testName', 'tvalue' => 'testValue'));
+        $actual = $query->give_sql_and_values();
+        $expected = array(
+            'UPDATE testTable SET name = :tname ,value = :tvalue',
+            array(':tname' => 'testName', ':tvalue' => 'testValue')
+        );
+        $this->assertEquals($expected, $actual);
+    }
 }
